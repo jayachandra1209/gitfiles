@@ -1,0 +1,304 @@
+three types of Configuration 
+1)system level
+
+git config --system
+
+this configuration will be available to every user of system
+
+2)global level
+
+git config --global
+
+git config --global user.name "Rohit"
+git config --global user.email "rohitshalgar11@gmail.com"
+
+git config --list
+user.name=Rohit
+user.email=rohitshalgar11@gmail.com
+
+cat ~/.gitconfig
+
+[user]
+        name = Rohit
+        email = rohitshalgar11@gmail.com
+[core]
+        editor = vim
+
+
+3)local level
+
+git config user.name "pradnya"
+git config user.email "pradnya@gmail.com"
+
+
+==================================
+
+to create a local repository 1st go to the directory and then make local level repository configuration
+
+once that is done then to create that file as local repository initate it
+
+1)git init
+2)create a file and add in repository
+
+--vi README.txt
+--git status
+--git add README.txt
+--git status
+--git commit -m "first commit"
+--git log
+
+3)Perform another commit
+
+--touch file1
+--git status
+--git add file1
+--git status
+--git commit -m "Second commit"
+
+4)check difference between commit 
+
+--git diff 7digitof1stcommitid  7digitof2ndcommitid
+
+example
+
+git diff b3a4775 31232ab
+diff --git a/file1 b/file1
+new file mode 100644
+index 0000000..e69de29
+
+====================================
+
+Github repository
+
+We can use github in  two ways , we can 
+
+1)create empty repository on github and clone it to local repository  
+2)create a local repository on system and push that to Github 
+
+
+[root@ip-172-31-23-104 remote-online]# git clone https://github.com/RohitShalgar                                             2212/online.git
+Cloning into 'online'...
+warning: You appear to have cloned an empty repository.
+
+
+[root@ip-172-31-23-104 remote-online]# git status
+# On branch master
+#
+# Initial commit
+#
+# Untracked files:
+#   (use "git add <file>..." to include in what will be committed)
+#
+#       ../online/
+nothing added to commit but untracked files present (use "git add" to track)
+[root@ip-172-31-23-104 remote-online]# cd online/
+[root@ip-172-31-23-104 online]# ls
+[root@ip-172-31-23-104 online]# pwd
+/git/training/remote-online/online
+[root@ip-172-31-23-104 online]# git status
+# On branch master
+#
+# Initial commit
+#
+nothing to commit (create/copy files and use "git add" to track)
+[root@ip-172-31-23-104 online]# ls -al
+total 0
+drwxr-xr-x. 3 root root  18 Feb 17 17:03 .
+drwxr-xr-x. 3 root root  20 Feb 17 17:03 ..
+drwxr-xr-x. 7 root root 119 Feb 17 17:03 .git
+[root@ip-172-31-23-104 online]# cd .git
+[root@ip-172-31-23-104 .git]# ls
+branches  config  description  HEAD  hooks  info  objects  refs
+[root@ip-172-31-23-104 .git]# cat config
+[core]
+        repositoryformatversion = 0
+        filemode = true
+        bare = false
+        logallrefupdates = true
+[remote "origin"]
+        url = https://github.com/RohitShalgar2212/online.git
+        fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+        remote = origin
+        merge = refs/heads/master
+[root@ip-172-31-23-104 .git]# cd ..
+[root@ip-172-31-23-104 online]# ls
+[root@ip-172-31-23-104 online]# vi remote_file.txt
+[root@ip-172-31-23-104 online]# ls
+remote_file.txt
+[root@ip-172-31-23-104 online]# git status
+# On branch master
+#
+# Initial commit
+#
+# Untracked files:
+#   (use "git add <file>..." to include in what will be committed)
+#
+#       remote_file.txt
+nothing added to commit but untracked files present (use "git add" to track)
+[root@ip-172-31-23-104 online]# git add .
+[root@ip-172-31-23-104 online]# git status
+# On branch master
+#
+# Initial commit
+#
+# Changes to be committed:
+#   (use "git rm --cached <file>..." to unstage)
+#
+#       new file:   remote_file.txt
+#
+[root@ip-172-31-23-104 online]# git commit -m "remote commit|remote_file1"
+[master (root-commit) 7b61d29] remote commit|remote_file1
+ 1 file changed, 1 insertion(+)
+ create mode 100644 remote_file.txt
+[root@ip-172-31-23-104 online]# git push -u origin master
+Username for 'https://github.com': rohitshalgar2212
+Password for 'https://rohitshalgar2212@github.com':
+Counting objects: 3, done.
+Writing objects: 100% (3/3), 254 bytes | 0 bytes/s, done.
+Total 3 (delta 0), reused 0 (delta 0)
+To https://github.com/RohitShalgar2212/online.git
+ * [new branch]      master -> master
+Branch master set up to track remote branch master from origin.
+[root@ip-172-31-23-104 online]# git log
+commit 7b61d29d29e2615132ce62723d74f8f9d3f39d96
+Author: Rohit <rohitshalgar11@gmail.com>
+Date:   Sat Feb 17 17:07:04 2018 +0000
+
+    remote commit|remote_file1
+[root@ip-172-31-23-104 online]#
+
+
+===================================================
+
+Created with radha user 
+
+[root@ip-172-31-23-104 online]# git config user.name "Radha shalgar"
+[root@ip-172-31-23-104 online]# git config user.email "radha.shalgar@gmail.com"
+[root@ip-172-31-23-104 online]# git config core.editor vim
+[root@ip-172-31-23-104 online]# git config --list
+user.name=Rohit
+user.email=rohitshalgar11@gmail.com
+core.editor=vim
+core.repositoryformatversion=0
+core.filemode=true
+core.bare=false
+core.logallrefupdates=true
+core.editor=vim
+remote.origin.url=https://github.com/RohitShalgar2212/online.git
+remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+branch.master.remote=origin
+branch.master.merge=refs/heads/master
+user.name=Radha shalgar
+user.email=radha.shalgar@gmail.com
+[root@ip-172-31-23-104 online]# vi web_radha.txt
+
+[root@ip-172-31-23-104 online]# git status
+# On branch master
+# Untracked files:
+#   (use "git add <file>..." to include in what will be committed)
+#
+#       web_radha.txt
+nothing added to commit but untracked files present (use "git add" to track)
+[root@ip-172-31-23-104 online]# git add .
+[root@ip-172-31-23-104 online]# git status
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#       new file:   web_radha.txt
+#
+[root@ip-172-31-23-104 online]# git commit -m "created with radha user"
+[master f6cff36] created with radha user
+ 1 file changed, 1 insertion(+)
+ create mode 100644 web_radha.txt
+
+ [root@ip-172-31-23-104 online]# git push origin master
+Username for 'https://github.com': rohitshalgar2212
+Password for 'https://rohitshalgar2212@github.com':
+Counting objects: 4, done.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 329 bytes | 0 bytes/s, done.
+Total 3 (delta 0), reused 0 (delta 0)
+To https://github.com/RohitShalgar2212/online.git
+   7b61d29..f6cff36  master -> master
+
+===============================================================
+
+Part 2:
+this is second part created local repo and push to github
+
+create a empty repository and add it to local repo using command git remote add
+
+[root@ip-172-31-23-104 online]# git remote add origin https://github.com/RohitShalgar2212/online1.git
+[root@ip-172-31-23-104 online]#
+[root@ip-172-31-23-104 online]# git push -u origin master
+Username for 'https://github.com': rohitshalgar2212
+Password for 'https://rohitshalgar2212@github.com':
+Counting objects: 6, done.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (6/6), 464 bytes | 0 bytes/s, done.
+Total 6 (delta 0), reused 0 (delta 0)
+To https://github.com/RohitShalgar2212/online1.git
+ * [new branch]      master -> master
+Branch master set up to track remote branch master from origin.
+
+ 
+=======================================================
+
+branching
+
+here in branching concept , we provide sepearate branch to other developer and not the master branch.
+
+Once we create branch same file of master get replicated to branch for 1st time
+
+
+once we update the files in brance we need to merge it with master locally and push it to github
+
+
+
+add branch
+--git branch branch1
+
+check in which branch we are in 
+--git branch
+
+change branch
+--git checkout branchname
+ex git checkout master (if you are in branch1)
+
+go to branch1 
+--git checkout branch1
+
+create a file in branch1
+--echo "this is branch file" >> branch1.txt
+
+--git status
+--git add branch1.txt
+--git commit -m "branch1 commit"
+
+switch to master branch
+--git checkout master
+
+check the files in master branch it should not show branch1.txt
+--ls
+
+merge the branch1 to master branch 
+--git merge branch1
+
+check the files in master branch it should show branch1.txt
+--ls
+
+push the master branch to github repository
+--git push -u origin master
+
+
+
+
+
+
+
+
+ 
+
+
